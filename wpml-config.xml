@@ -1,0 +1,11 @@
+<wpml-config>
+<admin-texts>
+<key name="theme_mods_rezoto">
+    <key name="rezoto_contact_number" />
+    <key name="rezoto_email" />
+    <key name="rezoto_time" />
+    <key name="rezoto_copyright_text" />
+    <key name="rezoto_room_viewmore_text" />
+</key>
+</admin-texts>
+</wpml-config>
