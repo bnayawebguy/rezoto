@@ -238,18 +238,24 @@
 	/** Add Dynamic Fonts **/
 	function rezoto_dynamic_google_fonts( $google_fonts ) {
 
-		$fonts = array();
 		$font_weights = array('400', '500', '600', '700', '800', '900');
 
-		/** Heading Font **/
-		$fonts[] = get_theme_mod( 'rezoto_heading', '' );
-		/** Body Font **/
-		$fonts[] = get_theme_mod( 'rezoto_body', '' );
+		$typos = array(
+			'rezoto_heading1',
+			'rezoto_heading2',
+			'rezoto_heading3',
+			'rezoto_heading4',
+			'rezoto_heading5',
+			'rezoto_heading6',
+			'rezoto_body',
+			'rezoto_menu',
+			'rezoto_widget_title',
+		);
 
-		/** Body Font **/
-		$fonts[] = get_theme_mod( 'rezoto_widget_title', '' );
+		/** Getting fonts for all the typography settings **/
+		foreach( $typos as $typo_setting_id ) {
+			$font = get_theme_mod( $typo_setting_id, '' );
 
-		foreach( $fonts as $font ) {
 			if( !empty( $font ) ) {
 				$google_fonts[$font['font-family']] = array(
 					'weights' => $font_weights,

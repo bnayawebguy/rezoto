@@ -4,6 +4,26 @@
 
 		$custom_css = "";
 
+		/** Anchor Text Dynamic Colors **/
+			$anchor_text_normal = get_theme_mod( 'rezoto_anchor_text_color_normal', '#ec6a2a' );
+			$anchor_text_hover = get_theme_mod( 'rezoto_anchor_text_color_hover', '#c5470d' );
+
+			if( $anchor_text_normal ) {
+				$custom_css .= "
+					a {
+						color: $anchor_text_normal;
+					}
+				";
+			}
+
+			if( $anchor_text_hover ) {
+				$custom_css .= "
+					a:hover {
+						color: $anchor_text_hover;
+					}
+				";
+			}
+
 		/** Slider Dynamic Options **/
 			$slider_top_margin = get_theme_mod( 'rezoto_slider_top_margin', '0' );
 
@@ -69,9 +89,6 @@
 			/** Normal Colors **/
 				/** Color **/
 				$custom_css .="
-					a:hover,
-					a:focus,
-					a:active,
 					.rezoto-banner ul a:hover,
 					.rezoto-banner ul a:focus, .rezoto-banner ul .trail-end,
 					.site-footer.layout2 ul li a:hover,
@@ -314,49 +331,33 @@
 
 
 			/** Typography Options **/
-				// Heading Font
-				$heading_fonts = get_theme_mod( 'rezoto_heading', '' );
-				if( !empty($heading_fonts) ) {
-					$custom_css .= "
-						h1,
-						h2,
-						h3,
-						h4,
-						h5,
-						h6 {
-							font-family: {$heading_fonts['font-family']};
-							font-weight: {$heading_fonts['variant']};
-							color: {$heading_fonts['color']};
-						}
-					";
-				}
+				$typos = array(
+					'rezoto_heading1' => 'h1',
+					'rezoto_heading2' => 'h2',
+					'rezoto_heading3' => 'h3',
+					'rezoto_heading4' => 'h4',
+					'rezoto_heading5' => 'h5',
+					'rezoto_heading6' => 'h6',
+					'rezoto_body' => 'body',
+					'rezoto_menu' => 'header .main-navigation ul li a',
+					'rezoto_widget_title' => '.right-sidebar #secondary .widget-title, .right-sidebar .widget_hb_widget_cart h3, .sroom-sidebar .widget h3',
+				);
 
-				// Body Font
-				$body_fonts = get_theme_mod( 'rezoto_body', '' );
-				if( !empty($body_fonts) ) {
-					$custom_css .= "
-						body {
-							font-family: {$body_fonts['font-family']};
-							font-weight: {$body_fonts['variant']};
-							color: {$body_fonts['color']};
-						}
-					";
-				}
-
-				// Widget Title Font
-				$widget_fonts = get_theme_mod( 'rezoto_widget_title', '' );
-				if( !empty($widget_fonts) ) {
-					$custom_css .= "
-						.right-sidebar #secondary .widget-title,
-						.right-sidebar .widget_hb_widget_cart h3,
-						.sroom-sidebar .widget h3 {
-							font-family: {$widget_fonts['font-family']};
-							font-weight: {$widget_fonts['variant']};
-							color: {$widget_fonts['color']};
-						}
-					";
-				}
-				
+				foreach( $typos as $key => $selector ) {
+					$fonts = get_theme_mod( $key, '' );
+					if( !empty($fonts) ) {
+						$custom_css .= "
+							$selector {
+								font-family: {$fonts['font-family']};
+								font-size: {$fonts['font-size']};
+								color: {$fonts['color']};
+								font-weight: {$fonts['font-weight']};
+								text-transform: {$fonts['text-transform']};
+								line-height: {$fonts['line-height']};
+							}
+						";
+					}
+				}				
 		}
 
 		/** Typography Options **/
